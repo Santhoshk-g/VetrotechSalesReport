@@ -1,0 +1,104 @@
+<template>
+    <lightning-card icon-name="standard:ai_accelerator_card" title={Title}>
+        <div class="slds-align_absolute-center" style="height:5rem" tabindex="0">
+            <div class="slds-p-around_x-small">
+                <lightning-combobox
+                    name="month"
+                    label={frommonth}
+                    value={selectedMonth}
+                    options={monthOptions}
+                    onchange={handleMonthChange}
+                    required="true">
+                </lightning-combobox>
+                </div>
+                <div class="slds-p-around_x-small">
+                    <lightning-combobox
+                        name="month"
+                        required="true"
+                        label={tomonth}
+                        value={selectedMonth1}
+                        options={monthOptions}
+                        onchange={handleMonthChange1}>
+                    </lightning-combobox>
+                    </div>
+                    <div class="slds-p-around_x-small">
+                    <lightning-combobox
+                    name="month"
+                    required="true"
+                    label={yfrommonth}
+                    value={selectedMonth2}
+                    options={monthOptions}
+                    onchange={handleMonthChange2}>
+                </lightning-combobox>
+                </div>
+                <div class="slds-p-around_x-small">
+                    <lightning-combobox
+                        name="month"
+                        required="true"
+                        label={ytomonth}
+                        value={selectedMonth3}
+                        options={monthOptions}
+                        onchange={handleMonthChange3}>
+                    </lightning-combobox>
+                    </div>
+                    <div class="slds-p-top_large">
+                    <lightning-button
+                        label="Submit"
+                        onclick={handleSubmit}
+                        variant="brand">
+                    </lightning-button>
+                    </div>
+            </div>
+            <template if:true = {tablerend}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="text-align: center;">TOTAL IMEA Volume</th>
+                    <th colspan="3" style="text-align: center;">Full Year of {year}</th>
+                    <th colspan="3" style="text-align: center;">{selectedlabel1} to {selectedlabel2} of Previous Year</th>
+                    <th colspan="3" style="text-align: center;">{selectedlabel3} to {selectedlabel4} of Current Year</th>
+                </tr>
+                <tr>
+                <template for:each={Columns} for:item="lable">
+                    
+                  <th key={lable} colspan="2">{lable}</th>
+                   
+                </template></tr>
+                <tr>
+                    <th style="background-color: lightgray;"></th>
+                    <th style="background-color: lightgray;">Fire</th>
+                    <th style="background-color: lightgray;">Protect</th>
+                    <th style="background-color: lightgray;">Total</th>
+                    <th style="background-color: lightgray;">Fire</th>
+                    <th style="background-color: lightgray;">Protect</th>
+                    <th style="background-color: lightgray;">Total</th>
+                    <th style="background-color: lightgray;">Fire</th>
+                    <th style="background-color: lightgray;">Protect</th>
+                    <th style="background-color: lightgray;">Total</th> 
+                </tr>
+                </thead>
+            <tbody>
+               <template for:each={vdata} for:item="value">
+
+                <tr key={value.region}>
+                    <th><b>{value.region}</b></th>
+                    <th>{value.Fire}</th>
+                    <th>{value.Protect}</th>
+                    <th>{value.Total}</th>
+                    <th>{value.PFire}</th>
+                    <th>{value.PProtect}</th>
+                    <th>{value.PTotal}</th>
+                    <th>{value.YFire}</th>
+                    <th>{value.YProtect}</th>
+                    <th>{value.YTotal}</th>
+                    </tr>
+                    </template>
+                    </tbody>
+                    </table>
+                    </template>
+                    <template if:true = {tablerendfalse}>
+                        <p style="color:red"><b>{errormsg}</b></p>
+                        <p style="color:red"><b>{error}</b></p>
+                    </template>
+</lightning-card>
+    </template>
